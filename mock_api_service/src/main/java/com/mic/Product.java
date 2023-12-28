@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
@@ -21,6 +23,8 @@ public class Product {
     private String name;
     
     @Positive(message = "Price must be positive")
+    @Min(value = 1,message = "min value 1 > ")
+    @Max(value = 10, message = "max value > 10")
     private double price;
 	public Long getId() {
 		return id;

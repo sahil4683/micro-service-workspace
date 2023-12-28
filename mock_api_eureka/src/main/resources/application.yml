@@ -1,0 +1,27 @@
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  instance:
+    hostname: localhost
+  renewalPercentThreshold: 0.85
+info:
+  application:
+    description: 'microservice : ${info.application.name}'
+    name: mock_api_eureka
+    version: 0.0.1-SNAPSHOT
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  info:
+    env:
+      enabled: true
+server:
+  port: 8081
+spring:
+  application:
+    name: ${info.application.name}

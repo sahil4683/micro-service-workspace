@@ -1,0 +1,39 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+info:
+  application:
+    description: 'microservice : ${info.application.name}'
+    name: mock_api_getway
+    version: 0.0.1-SNAPSHOT
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  info:
+    env:
+      enabled: true
+server:
+  port: 8082
+spring:
+  application:
+    name: ${info.application.name}
+  cloud:
+    gateway:
+      routes:
+     
+      - id: mock-api-service
+        predicates: Path=/products/**
+        uri: http://localhost:8084
+     
+      - id: mock_api_auth
+        predicates: Path=/auth/**
+        uri: http://localhost:8083
+        
+  main:
+    web-application-type: reactive
+springdoc:
+  swagger-ui:
+    path: /ms-ui.html
